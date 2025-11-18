@@ -38,21 +38,29 @@
       display: flex;
       align-items: flex-start;
       justify-content: center;
-      padding: 28px 18px 140px;
-      /* bottom padding for fixed footer */
+      padding: 20px 16px 40px;
     }
 
-    /* 主容器 */
+    /* 主容器 - 垂直單欄布局 */
     .wrap {
       width: 100%;
-      max-width: 920px;
-      display: grid;
-      grid-template-columns: 420px 1fr;
+      max-width: 680px;
+      display: flex;
+      flex-direction: column;
       gap: 20px;
-      align-items: start;
     }
 
-    /* 左側卡片：輸入與結果 */
+    @media (max-width: 768px) {
+      body {
+        padding: 16px 12px 30px;
+      }
+
+      .wrap {
+        gap: 16px;
+      }
+    }
+
+    /* 輸入與結果卡片 */
     .panel {
       background: var(--card);
       border-radius: var(--radius);
@@ -60,6 +68,7 @@
       box-shadow: var(--shadow);
       position: relative;
       overflow: visible;
+      width: 100%;
     }
 
     h1 {
@@ -69,6 +78,13 @@
       display: flex;
       align-items: center;
       gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 22px;
+      }
     }
 
     .subtitle {
@@ -141,11 +157,12 @@
       color: #e83b7b;
     }
 
-    /* 右側：插畫 + 說明卡 */
+    /* 插畫 + 說明卡區域 */
     .art-panel {
       display: flex;
       flex-direction: column;
       gap: 14px;
+      width: 100%;
     }
 
     .sticker {
@@ -239,65 +256,6 @@
       line-height: 1.5;
     }
 
-    /* 說明區（固定在頁面下方） */
-    .formula-footer {
-      position: fixed;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(180deg, #fff, #fff8fb);
-      border-top: 1px solid rgba(0, 0, 0, 0.04);
-      padding: 18px 22px;
-      box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.04);
-    }
-
-    .formula-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: flex;
-      gap: 18px;
-      align-items: flex-start;
-      justify-content: space-between;
-      flex-wrap: wrap;
-    }
-
-    .table-block {
-      background: #fff;
-      border-radius: 12px;
-      padding: 12px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
-      min-width: 420px;
-    }
-
-    .table-block table {
-      border-collapse: collapse;
-      width: 100%;
-      font-size: 13px;
-    }
-
-    .table-block th,
-    .table-block td {
-      border-bottom: 1px dashed #f3dbe4;
-      padding: 8px 6px;
-      text-align: center;
-    }
-
-    .table-block th {
-      font-weight: 700;
-      color: #7b1d3e;
-      background: linear-gradient(90deg, #fff7fb, #fff0f7);
-      border-radius: 6px;
-    }
-
-    .card-block {
-      max-width: 420px;
-      min-width: 280px;
-      background: linear-gradient(180deg, #fff, #fff9fb);
-      padding: 12px;
-      border-radius: 12px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.03);
-    }
-
     .card {
       display: flex;
       gap: 8px;
@@ -314,26 +272,93 @@
       z-index: 20;
     }
 
-    .info-section {
-      position: relative;
-      z-index: 1;
-    }
 
-
-    /* 響應式 */
-    @media (max-width:900px) {
+    /* 響應式設計 */
+    @media (max-width: 560px) {
       .wrap {
-        grid-template-columns: 1fr;
-        max-width: 560px;
+        max-width: 100%;
       }
 
-      .dog-wrap {
-        width: 110px;
-        height: 110px
+      .panel {
+        padding: 14px;
       }
 
       .sticker {
-        align-items: flex-start
+        padding: 14px;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .dog-wrap {
+        width: 100px;
+        height: 100px;
+      }
+
+      .dog-svg {
+        width: 100px;
+        height: 100px;
+      }
+
+      .result-box {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .info-card {
+        font-size: 13px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 12px 8px 24px;
+      }
+
+      .panel {
+        padding: 12px;
+        border-radius: 12px;
+      }
+
+      h1 {
+        font-size: 20px;
+      }
+
+      .subtitle {
+        font-size: 12px;
+      }
+
+      label {
+        font-size: 13px;
+      }
+
+      input[type="date"],
+      select {
+        padding: 10px;
+        font-size: 14px;
+      }
+
+      button.calc {
+        padding: 11px;
+        font-size: 15px;
+      }
+
+      .result-text {
+        font-size: 14px;
+      }
+
+      .result-key {
+        font-size: 18px;
+      }
+
+      .card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .card svg {
+        flex: 0 0 auto;
       }
     }
   </style>
@@ -469,56 +494,52 @@
         </div>
       </div>
 
-      <div class="info-card" style="font-size:14px">
-        <strong style="display:block; margin-bottom:6px;">功能特色</strong>
-        • 手繪貼圖風 UI（LINE 貼圖感）<br>
-        • 固定顯示詳細換算表與說明（頁底）<br>
-        • 狗狗會眨眼與搖尾巴動畫（持續播放）<br>
-        • 按鈕有微放大互動
-      </div>
-    </aside>
-  </div>
-
-  <!-- 固定下方：詳細換算公式（表格 + 圖文卡） -->
-  <footer class="info-section" aria-labelledby="formulaTitle">
-    <div class="formula-inner">
-      <div class="table-block" role="region" aria-label="換算表">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+      <!-- 詳細換算表 -->
+      <div class="info-card" style="padding:18px;background:#fff;box-shadow:var(--shadow)">
+        <div
+          style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px">
           <div style="font-weight:800;color:#7b1d3e;">詳細換算表</div>
-          <div style="font-size:13px;color:var(--muted)">資料來源：<a href='https://hehopets.com/age-conversion'
+          <div style="font-size:12px;color:var(--muted)">資料來源：<a href='https://hehopets.com/age-conversion'
               target='about:blank'>@犬貓年齡換算@</a><a href='https://pets.edh.tw/blog/dog-age-conversion-guide'
               target='about:blank'>@早安毛健康@</a></div>
         </div>
 
-        <!-- 換算資料表 (來自 CSV) -->
-        <table aria-hidden="false">
-          <thead>
-            <tr>
-              <th>狗狗年齡</th>
-              <th>
-                <p><b>小型犬（9kg 以下）</b></p>換算至人類年齡
-              </th>
-              <th>
-                <p><b>中型犬（9–23kg）</b></p>換算至人類年齡
-              </th>
-              <th>
-                <p><b>大型犬（23–45kg）</b></p>換算至人類年齡
-              </th>
-              <th>
-                <p><b>巨型犬（45kg 以上）</b></p>換算至人類年齡
-              </th>
-            </tr>
-          </thead>
-          <tbody id="dataTableBody">
-            <!-- JS 會填入表格列 -->
-          </tbody>
-        </table>
+        <div style="overflow-x:auto">
+          <table style="border-collapse:collapse;width:100%;font-size:13px;min-width:500px" aria-label="換算表">
+            <thead>
+              <tr>
+                <th
+                  style="border-bottom:1px dashed #f3dbe4;padding:8px 6px;text-align:center;font-weight:700;color:#7b1d3e;background:linear-gradient(90deg,#fff7fb,#fff0f7);border-radius:6px">
+                  狗狗年齡</th>
+                <th
+                  style="border-bottom:1px dashed #f3dbe4;padding:8px 6px;text-align:center;font-weight:700;color:#7b1d3e;background:linear-gradient(90deg,#fff7fb,#fff0f7);border-radius:6px">
+                  <p style="margin:0"><b>小型犬（9kg 以下）</b></p>換算至人類年齡
+                </th>
+                <th
+                  style="border-bottom:1px dashed #f3dbe4;padding:8px 6px;text-align:center;font-weight:700;color:#7b1d3e;background:linear-gradient(90deg,#fff7fb,#fff0f7);border-radius:6px">
+                  <p style="margin:0"><b>中型犬（9–23kg）</b></p>換算至人類年齡
+                </th>
+                <th
+                  style="border-bottom:1px dashed #f3dbe4;padding:8px 6px;text-align:center;font-weight:700;color:#7b1d3e;background:linear-gradient(90deg,#fff7fb,#fff0f7);border-radius:6px">
+                  <p style="margin:0"><b>大型犬（23–45kg）</b></p>換算至人類年齡
+                </th>
+                <th
+                  style="border-bottom:1px dashed #f3dbe4;padding:8px 6px;text-align:center;font-weight:700;color:#7b1d3e;background:linear-gradient(90deg,#fff7fb,#fff0f7);border-radius:6px">
+                  <p style="margin:0"><b>巨型犬（45kg 以上）</b></p>換算至人類年齡
+                </th>
+              </tr>
+            </thead>
+            <tbody id="dataTableBody">
+              <!-- JS 會填入表格列 -->
+            </tbody>
+          </table>
+        </div>
       </div>
 
-      <div class="card-block" role="region" aria-label="換算公式說明">
-        <div style="font-weight:800;color:#7b1d3e;margin-bottom:8px" id="formulaTitle">換算公式說明（表格 + 圖文）</div>
+      <!-- 換算公式說明 -->
+      <div class="info-card" style="padding:18px;background:#fff;box-shadow:var(--shadow)">
+        <div style="font-weight:800;color:#7b1d3e;margin-bottom:12px">換算公式說明（表格 + 圖文）</div>
 
-        <!-- 圖文卡片 ②+③ -->
         <div class="card">
           <svg width="58" height="58" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <circle cx="32" cy="32" r="30" fill="#fff" stroke="#2b2b2b" stroke-width="1.8" />
@@ -552,8 +573,16 @@
           表格包含：1、2、3、5、7、10、12、15 歲對應的人類年齡。
         </div>
       </div>
-    </div>
-  </footer>
+
+      <div class="info-card" style="font-size:14px">
+        <strong style="display:block; margin-bottom:6px;">功能特色</strong>
+        • 手繪貼圖風 UI（LINE 貼圖感）<br>
+        • 詳細換算表與公式說明<br>
+        • 狗狗會眨眼與搖尾巴動畫（持續播放）<br>
+        • 按鈕有微放大互動
+      </div>
+    </aside>
+  </div>
 
   <script>
     // ---- 1. CSV 資料（來自上傳的 table.csv） ----
