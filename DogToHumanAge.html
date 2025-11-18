@@ -108,6 +108,17 @@
       border: 1px dashed #ffd6e6;
       background: linear-gradient(180deg, #fff, #fff9fb);
       font-size: 15px;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+    }
+
+    /* 為 select 添加自定義箭頭 */
+    select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath fill='%23ff7aa2' d='M0 0l6 8 6-8z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 36px;
     }
 
     .controls {
@@ -127,12 +138,27 @@
       cursor: pointer;
       box-shadow: 0 8px 18px rgba(255, 122, 162, 0.18);
       transition: transform .18s ease, box-shadow .18s ease;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
     }
 
-    /* hover 微放大（D） */
+    /* hover 和 active 效果 */
     button.calc:hover {
       transform: scale(1.04);
       box-shadow: 0 14px 30px rgba(255, 122, 162, 0.22);
+    }
+
+    button.calc:active {
+      transform: scale(0.98);
+      box-shadow: 0 4px 12px rgba(255, 122, 162, 0.15);
+    }
+
+    /* 移除行動裝置上的 hover 效果 */
+    @media (hover: none) {
+      button.calc:hover {
+        transform: none;
+        box-shadow: 0 8px 18px rgba(255, 122, 162, 0.18);
+      }
     }
 
     .result-box {
@@ -173,6 +199,12 @@
       display: flex;
       gap: 12px;
       align-items: center;
+    }
+
+    @media (max-width: 640px) {
+      .sticker {
+        padding: 16px;
+      }
     }
 
     /* 手繪狗狗插畫區 */
@@ -272,8 +304,34 @@
       z-index: 20;
     }
 
+    /* 表格樣式優化 */
+    table td {
+      border-bottom: 1px dashed #f3dbe4;
+      padding: 8px 6px;
+      text-align: center;
+    }
 
-    /* 響應式設計 */
+    /* 資料來源連結優化 */
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    a:hover {
+      color: #ff5b8a;
+      text-decoration: underline;
+    }
+
+
+    /* 平板尺寸優化 */
+    @media (max-width: 768px) and (min-width: 561px) {
+      .wrap {
+        max-width: 620px;
+      }
+    }
+
+    /* 響應式設計 - 小螢幕 */
     @media (max-width: 560px) {
       .wrap {
         max-width: 100%;
@@ -307,9 +365,11 @@
 
       .info-card {
         font-size: 13px;
+        padding: 12px;
       }
     }
 
+    /* 小型手機優化 */
     @media (max-width: 480px) {
       body {
         padding: 12px 8px 24px;
@@ -322,6 +382,7 @@
 
       h1 {
         font-size: 20px;
+        gap: 6px;
       }
 
       .subtitle {
@@ -330,6 +391,7 @@
 
       label {
         font-size: 13px;
+        margin-bottom: 4px;
       }
 
       input[type="date"],
@@ -355,10 +417,67 @@
         flex-direction: column;
         align-items: center;
         text-align: center;
+        gap: 6px;
       }
 
       .card svg {
         flex: 0 0 auto;
+        width: 48px;
+        height: 48px;
+      }
+
+      /* 表格小螢幕優化 */
+      table {
+        font-size: 11px !important;
+        min-width: 450px !important;
+      }
+
+      table th,
+      table td {
+        padding: 6px 4px !important;
+      }
+
+      table th p {
+        font-size: 10px;
+      }
+    }
+
+    /* 超小螢幕優化 (iPhone SE等) */
+    @media (max-width: 375px) {
+      body {
+        padding: 10px 6px 20px;
+      }
+
+      h1 {
+        font-size: 18px;
+      }
+
+      .panel,
+      .sticker {
+        padding: 10px;
+      }
+
+      .wrap {
+        gap: 12px;
+      }
+
+      table {
+        font-size: 10px !important;
+        min-width: 380px !important;
+      }
+
+      table th,
+      table td {
+        padding: 5px 3px !important;
+      }
+
+      table th p {
+        font-size: 9px;
+      }
+
+      /* 更緊湊的標題和文字 */
+      .info-card {
+        padding: 8px !important;
       }
     }
   </style>
@@ -504,7 +623,7 @@
               target='about:blank'>@早安毛健康@</a></div>
         </div>
 
-        <div style="overflow-x:auto">
+        <div style="overflow-x:auto;-webkit-overflow-scrolling:touch">
           <table style="border-collapse:collapse;width:100%;font-size:13px;min-width:500px" aria-label="換算表">
             <thead>
               <tr>
